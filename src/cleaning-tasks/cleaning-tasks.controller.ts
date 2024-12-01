@@ -5,20 +5,20 @@ import { CleaningTasksService } from './cleaning-tasks.service';
 export class CleaningTasksController {
     constructor(private readonly cleaningTaskService: CleaningTasksService) { }
 
-    @Get()
+    @Get('/')
     findAll() {
         return this.cleaningTaskService.getAllTasks()
     }
 
-    @Post()
-    createDefaultCleanList(): Array<String> {
-        return [];
+    @Post('default')
+    createDefaultCleanList() {
+        return this.cleaningTaskService.createDefaultCleanList()
     }
 
-    @Post()
-    createTask(@Body() title: String): Boolean {
+    @Post('create')
+    createTask(@Body() title: String) {
         // 새로운 청소내역을 생성
-        return true
+        return this.cleaningTaskService.createTask(title)
     }
 
     @Patch(':id')
